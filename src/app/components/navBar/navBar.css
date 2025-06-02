@@ -1,0 +1,15 @@
+.spacer{
+  flex: 1 1 auto;
+}
+
+.tool-bar{
+  background-color: var(--mat-sys-primary);
+}
+
+a[matButton]{
+  color: var(--mat-sys-secondary) !important;
+}
+
+a[matButton]:hover{
+  background-color: var(--mat-sys-background) !important;
+}
