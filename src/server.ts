@@ -12,10 +12,6 @@ const browserDistFolder = join(import.meta.dirname, '../public');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Server data' });
-});
-
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -23,6 +19,10 @@ app.use(
     redirect: false,
   }),
 );
+
+app.get('/hola', (req, res) => {
+  res.json({ message: 'Server data' });
+});
 
 app.use((req, res, next) => {
   angularApp

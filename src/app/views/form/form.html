@@ -1,0 +1,16 @@
+<nav-bar></nav-bar>
+<main class="main-content">
+  <section class="left-container">
+    <h1 class="title">Write on Here! :)</h1>
+    <form class="form">
+        Message:<input-selector [(value)]="name"></input-selector>
+        <button-selector label="Reset"></button-selector>
+    </form>
+  </section>
+  <section class="right-container">
+    <h1 class="title">Preview</h1>
+    <article class="preview-container">
+      <p class="preview-text">{{ name }}</p>
+    </article>
+  </section>
+</main>
