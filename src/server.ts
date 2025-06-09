@@ -6,24 +6,18 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
-
-const browserDistFolder = join(import.meta.dirname, '../public');
+import productsRouter  from '@expressRoutes/products/products.route'
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.use(
-  express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: false,
-    redirect: false,
-  }),
-);
+const browserDistFolder = join(import.meta.dirname, '../public');
 
-app.get('/hola', (req, res) => {
-  res.json({ message: 'Server data' });
-});
 
+app.use(express.static(browserDistFolder, { maxAge: '1y', index: false, redirect: false})); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', productsRouter);
 app.use((req, res, next) => {
   angularApp
     .handle(req)
@@ -32,6 +26,8 @@ app.use((req, res, next) => {
     )
     .catch(next);
 });
+
+
 
 if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] || 4000;

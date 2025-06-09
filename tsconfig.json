@@ -19,7 +19,17 @@
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/app/components/*"],
-      "@views/*": ["src/app/views/*"]
+      "@layouts/*": ["src/app/layouts/*"],
+      "@routes/*": ["src/app/routes/*"],
+      "@views/*": ["src/app/views/*"],
+      "@services/*": ["src/app/services/*"],
+      "@models/*": ["src/app/models/*"],
+      "@expressModels/*": ["src/app/api/models/*"],
+      "@expressMiddleware/*": ["src/app/api/middleware/*"],
+      "@expressControllers/*": ["src/app/api/controllers/*"],
+      "@expressRoutes/*": ["src/app/api/routes/*"],
+      "@expressConfig/*": ["src/app/api/config/*"],
+      "@sequelizeModels/*": ["src/app/api/sequelize/models/*"],
     },
   },
 
