@@ -2,9 +2,41 @@
 <main>
   <nav>
     <h1>Products</h1>
-    <button>Add Product</button>
+    <button (click)="openModal()">Add Product</button>
+    @if(isOpen()){
+      <article>
+        <form (submit)="createProduct($event)">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter product name" required />
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" placeholder="Enter product description" required></textarea>
+
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" step="0.01" placeholder="Enter product price" required />
+
+          <label for="image_url">Image URL:</label>
+          <input type="url" id="image_url" name="image_url" placeholder="Enter image URL" />
+
+          <button type="submit">Create Product</button>
+          <button type="button" (click)="closeModal()">Cancel</button>
+        </form>
+      </article>
+    }
   </nav>
   <section>
-    
+    @for (product of products(); track product.id_products) {
+      <div class="product-card">
+        <h2>{{ product.name }}</h2>
+        <p>Price: {{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+      </div>
+    }
+
+    @if(this.error()){
+      <div class="error-message">
+        <p>{{ this.error() }}</p>
+      </div>
+    }
   </section>
 </main>

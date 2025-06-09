@@ -30,6 +30,7 @@
       "@expressRoutes/*": ["src/app/api/routes/*"],
       "@expressConfig/*": ["src/app/api/config/*"],
       "@sequelizeModels/*": ["src/app/api/sequelize/models/*"],
+      "@joiSchemas/*": ["src/app/api/joi/*"],
     },
   },
 

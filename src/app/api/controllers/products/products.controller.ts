@@ -6,3 +6,8 @@ export const addProduct = async (product: ProductPayload): Promise<ProductAttrib
   const newProduct = await Products.create(product)
   return newProduct;
 }
+
+export const getProducts = async (): Promise<ProductAttributes[]> => {
+  const products = await Products.findAll();
+  return products;
+}
