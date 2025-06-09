@@ -4,6 +4,14 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * { box-sizing: border-box; }
 
+a[matButton]{
+  color: var(--mat-sys-secondary) !important;
+}
+
+a[matButton]:hover{
+  background-color: var(--mat-sys-background) !important;
+}
+
 /* Note: Color palettes are generated from primary: #82A6B1, secondary: #272932 */
 html {
   /* COLOR SYSTEM VARIABLES */
