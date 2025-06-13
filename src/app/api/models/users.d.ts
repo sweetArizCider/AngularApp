@@ -1,0 +1,12 @@
+export interface User extends UserPayload{
+  id: number;
+  created_at: Date;
+  active: boolean;
+}
+
+export interface UserPayload {
+  username: string;
+  email: string;
+  password: string;
+}
+

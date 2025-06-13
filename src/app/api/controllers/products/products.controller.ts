@@ -1,13 +1,20 @@
 import Products from "@app/api/sequelize/models/Products.model";
-import { ProductPayload, ProductAttributes } from '@expressModels/products';
+import { ProductAttributes , ProductPayload } from '@expressModels/products';
 
 
 export const addProduct = async (product: ProductPayload): Promise<ProductAttributes> => {
-  const newProduct = await Products.create(product)
-  return newProduct;
+  return await Products.create( product );
 }
 
 export const getProducts = async (): Promise<ProductAttributes[]> => {
-  const products = await Products.findAll();
-  return products;
+  return await Products.findAll();
+}
+
+export const removeProduct = async (productId: number): Promise<void> => {
+  const product = await Products.findByPk(productId);
+  if (!product) {
+    throw new Error('Product not found');
+  }
+  await product.destroy();
+  return;
 }
