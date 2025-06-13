@@ -1,5 +1,5 @@
 import { Component , OnInit , signal } from '@angular/core';
-import { ProductAttributes , ProductPayload } from '@app/api/models/products';
+import { ProductAttributes , ProductPayload } from '@expressModels/products/products';
 import { NavBar } from '@components/navBar/navBar';
 import { getProducts , addProduct , removeProduct } from '@services/products/products.service';
 

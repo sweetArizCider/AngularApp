@@ -1,7 +1,7 @@
 import Router from 'express';
 import { Request, Response } from 'express';
 import { addProduct, getProducts, removeProduct } from '@expressControllers/products/products.controller';
-import { ProductAttributes, ProductPayload } from '@expressModels/products';
+import { ProductAttributes, ProductPayload } from '@expressModels/products/products';
 import productValidator from '@joiSchemas/products/products.joi'
 
 const router = Router();

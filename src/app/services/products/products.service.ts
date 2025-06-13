@@ -1,9 +1,6 @@
-import { ProductAttributes , ProductPayload } from "@app/api/models/products";
-import { config } from "dotenv"
+import { ProductAttributes , ProductPayload } from "@expressModels/products/products";
 
-config();
-
-const API_BASE_URL = process.env['API_BASE_URL'] + 'products';
+const API_BASE_URL = '/api/products';
 
 export const getProducts = async (): Promise<ProductAttributes[]> => {
   try {

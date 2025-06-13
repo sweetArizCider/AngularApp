@@ -1,5 +1,5 @@
 import Products from "@app/api/sequelize/models/Products.model";
-import { ProductAttributes , ProductPayload } from '@expressModels/products';
+import { ProductAttributes , ProductPayload } from '@expressModels/products/products';
 
 
 export const addProduct = async (product: ProductPayload): Promise<ProductAttributes> => {

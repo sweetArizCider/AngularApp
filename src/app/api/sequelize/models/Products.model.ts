@@ -1,9 +1,9 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import { getSequelizeInstance } from '@expressConfig/database';
-import { ProductAttributes, ProductPayload } from "@expressModels/products";
+import { ProductAttributes, ProductPayload } from "@expressModels/products/products";
 
 
-class Products extends Model<ProductAttributes, ProductPayload> 
+class Products extends Model<ProductAttributes, ProductPayload>
   implements ProductAttributes {
     public id_products!: number;
     public name!: string;
@@ -12,7 +12,7 @@ class Products extends Model<ProductAttributes, ProductPayload>
     public image_url?: string;
     public created_at?: Date;
     public updated_at?: Date;
-  } 
+  }
 
 Products.init(
   {
@@ -33,7 +33,7 @@ Products.init(
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       validate: {
-        min: 0, 
+        min: 0,
       },
     },
     image_url: {
@@ -50,10 +50,10 @@ Products.init(
     },
   },
   {
-    sequelize: getSequelizeInstance(), 
+    sequelize: getSequelizeInstance(),
     modelName: 'Products',
     tableName: 'products',
-    timestamps: false, 
+    timestamps: false,
   }
 );
 

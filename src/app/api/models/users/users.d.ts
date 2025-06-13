@@ -10,3 +10,7 @@ export interface UserPayload {
   password: string;
 }
 
+export interface UserLoginPayload {
+  username: string;
+  password: string;
+}

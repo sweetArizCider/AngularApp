@@ -1,5 +1,5 @@
 import { DataTypes , Model  } from 'sequelize';
-import { User , UserPayload } from '@expressModels/users';
+import { User , UserPayload } from '@expressModels/users/users';
 import { getSequelizeInstance } from '@expressConfig/database';
 
 class Users extends Model<User , UserPayload> {}
