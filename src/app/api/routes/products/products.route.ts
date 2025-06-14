@@ -1,12 +1,14 @@
 import Router from 'express';
 import { Request, Response } from 'express';
 import { addProduct, getProducts, removeProduct } from '@expressControllers/products/products.controller';
-import { ProductAttributes, ProductPayload } from '@expressModels/products/products';
+import { ProductPayload } from '@expressModels/products/products';
 import productValidator from '@joiSchemas/products/products.joi'
+import { authMiddleware } from '@expressMiddleware/auth/auth.middleware';
+
 
 const router = Router();
 
-router.post('/products', async (req: Request, res: Response): Promise<void> => {
+router.post('/products', authMiddleware , async (req: Request, res: Response): Promise<void> => {
   try {
     const productPayload: ProductPayload = req.body;
     const { error } = productValidator.validate(productPayload);
@@ -24,7 +26,7 @@ router.post('/products', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
-router.get('/products', async (_, res: Response) => {
+router.get('/products', authMiddleware , async (_, res: Response) => {
   try {
     const products = await getProducts();
     res.status(200).json(products);
@@ -33,7 +35,7 @@ router.get('/products', async (_, res: Response) => {
   }
 });
 
-router.delete('/products/:id', async (req: Request, res: Response): Promise<void> => {
+router.delete('/products/:id', authMiddleware , async (req: Request, res: Response): Promise<void> => {
   try {
 
     const productId = Number(req.params['id']);

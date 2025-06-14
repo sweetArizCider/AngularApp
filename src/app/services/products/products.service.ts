@@ -1,10 +1,13 @@
 import { ProductAttributes , ProductPayload } from "@expressModels/products/products";
+import { getAuthHeaders } from "@app/services/auth/auth.service";
 
 const API_BASE_URL = '/api/products';
 
 export const getProducts = async (): Promise<ProductAttributes[]> => {
   try {
-    const response = await fetch(API_BASE_URL);
+    const response = await fetch(API_BASE_URL, {
+      headers: getAuthHeaders(),
+    });
     return await response.json();
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -16,9 +19,7 @@ export const addProduct = async (productPayload: ProductPayload): Promise<Produc
   try {
     const requestOptions: RequestInit = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(productPayload),
     }
 
@@ -38,12 +39,9 @@ export const addProduct = async (productPayload: ProductPayload): Promise<Produc
 }
 
 export const removeProduct = async (productId: number): Promise<string> => {
-
   const requestOptions: RequestInit = {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: getAuthHeaders(),
   };
 
   if (isNaN(productId)) {

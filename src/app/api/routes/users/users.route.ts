@@ -40,18 +40,18 @@ router.post('/users/auth', async (req : Request, res : Response) => {
   }
 
   try{
-    const user = await loginUser(userLoginPayload)
-    if (user instanceof Error) {
-      res.status(400).json({error: user.message});
+    const result = await loginUser(userLoginPayload);
+    if (result instanceof Error) {
+      res.status(401).json({error: result.message});
       return;
     }
-    res.status(200).json(user);
+    const { user, token } = result;
+    res.status(200).json({ user, token });
     return;
   }catch(err){
     res.status(500).json({ error: 'Internal Server Error' });
     return;
   }
-
 })
 
 

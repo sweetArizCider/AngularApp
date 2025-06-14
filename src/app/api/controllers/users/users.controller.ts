@@ -1,6 +1,12 @@
 import Users from '@sequelizeModels/Users.model';
-import {UserLoginPayload, UserPayload} from '@expressModels/users/users';
+import {UserLoginPayload, UserPayload, UserWithToken} from '@expressModels/users/users';
 import {userSchema, userLoginSchema} from '@joiSchemas/users/users.joi';
+import { config } from 'dotenv'
+config();
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env['SECRET']
+const JWT_OPTIONS = { expiresIn: 600 };
 
 export const createUser = async (userPayload : UserPayload) : Promise<Users | Error> => {
   try {
@@ -15,7 +21,7 @@ export const createUser = async (userPayload : UserPayload) : Promise<Users | Er
   }
 }
 
-export const loginUser = async (userLoginPayload : UserLoginPayload) : Promise<Users | Error> => {
+export const loginUser = async (userLoginPayload : UserLoginPayload) : Promise<UserWithToken | Error> => {
   try {
     const { error } = userLoginSchema.validate(userLoginPayload);
     if( error ) {
@@ -27,10 +33,21 @@ export const loginUser = async (userLoginPayload : UserLoginPayload) : Promise<U
         password: userLoginPayload.password
       }
     });
+
+
     if (!user) {
-      throw new Error('Invalid username or password');
+      return Error('Invalid username or password');
     }
-    return user;
+
+    if( !JWT_SECRET ) {
+      return Error('JWT_SECRET is not defined in environment variables');
+    }
+
+    const plainUser = user.toJSON() ?? user.get({ plain: true });
+
+    const token = jwt.sign(plainUser, JWT_SECRET, JWT_OPTIONS);
+
+    return { user , token};
   } catch ( error ) {
     console.error( 'Error logging in user:', error );
     throw error;
